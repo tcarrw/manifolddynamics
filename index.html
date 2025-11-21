@@ -26,6 +26,39 @@
       color:var(--ink);
       font:16px/1.6 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
     }
+    a{color:var(--link);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .site-header{
+      background:var(--panel);
+      border-bottom:1px solid var(--rule);
+      padding:12px 20px;
+      position:sticky;
+      top:0;
+      z-index:100;
+    }
+    .site-header-inner{
+      max-width:var(--maxw);
+      margin:0 auto;
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      gap:12px 24px;
+    }
+    .site-title{
+      font-weight:700;
+      font-size:18px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      -webkit-background-clip:text;
+      background-clip:text;
+      -webkit-text-fill-color:transparent;
+      color:transparent;
+    }
+    .site-nav{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px 16px;
+    }
+    .site-nav a{font-size:14px}
     .wrap{max-width:var(--maxw);margin:0 auto;padding:48px 20px 96px}
     header{text-align:center;margin-bottom:32px}
     .logo{
@@ -34,18 +67,18 @@
       letter-spacing:2px;
       background:linear-gradient(135deg,var(--accent),var(--accent-2));
       -webkit-background-clip:text;
+      background-clip:text;
       -webkit-text-fill-color:transparent;
+      color:transparent;
       display:inline-block;
       margin-bottom:12px;
     }
     h1{margin:0 0 8px;font-size:clamp(26px,4.5vw,38px);line-height:1.2}
     .subtitle{color:var(--muted);font-size:15px}
     .meta{margin-top:8px;color:var(--muted);font-size:14px}
-    nav{margin:26px auto;max-width:740px;text-align:left;background:var(--panel);
+    nav.toc{margin:26px auto;max-width:740px;text-align:left;background:var(--panel);
       border:1px solid var(--rule);border-radius:12px;padding:16px 20px}
-    nav a{color:var(--link);text-decoration:none}
-    nav a:hover{text-decoration:underline}
-    nav ul{margin:0;padding-left:18px}
+    nav.toc ul{margin:0;padding-left:18px}
     section{background:rgba(255,255,255,.02);border:1px solid var(--rule);
       border-radius:16px;padding:24px 20px;margin:18px 0}
     h2{margin:0 0 8px;font-size:clamp(20px,3.5vw,26px)}
@@ -53,18 +86,46 @@
     p{margin:10px 0 0}
     .equation{display:block;margin:12px 0;padding:12px 14px;background:var(--code);
       border:1px solid var(--rule);border-radius:10px;
-      font-family:ui-monospace,Menlo,Consolas,"Courier New",monospace;overflow:auto;white-space:nowrap}
+      font-family:ui-monospace,Menlo,Consolas,"Courier New",monospace;overflow-x:auto;white-space:nowrap}
     .abstract{font-style:italic;color:var(--muted)}
     .callout{padding:14px;border:1px dashed var(--rule);border-radius:12px;background:rgba(245,158,11,.08)}
-    footer{margin-top:26px;color:var(--muted);font-size:13px;text-align:center}
-    table{width:100%;border-collapse:collapse;margin:8px 0}
+    .table-wrap{overflow-x:auto;margin:8px 0}
+    table{width:100%;border-collapse:collapse;min-width:500px}
     th,td{border:1px solid var(--rule);padding:8px;vertical-align:top}
     th{background:var(--panel);text-align:left}
     code{background:var(--code);padding:1px 4px;border-radius:4px}
-    @media print{body{background:#fff}nav,section{break-inside:avoid}}
+    footer{margin-top:26px;color:var(--muted);font-size:13px;text-align:center}
+    .footer-earth{
+      margin-bottom:24px;
+      padding-bottom:24px;
+      border-bottom:1px solid var(--rule);
+      font-size:14px;
+      line-height:1.6;
+    }
+    .footer-earth a{color:var(--accent);font-weight:600}
+    @media print{body{background:#fff}.site-header{position:static}nav,section{break-inside:avoid}}
   </style>
 </head>
 <body>
+  <div class="site-header">
+    <div class="site-header-inner">
+      <div class="site-title">✨ Manifold Dynamics</div>
+      <nav class="site-nav">
+        <a href="https://manifolddynamics.plnt.earth">Manifold Dynamics</a>
+        <a href="https://manifolddynamics.plnt.earth/t">Manifold T</a>
+        <a href="https://infinity.plnt.earth">Infinity</a>
+        <a href="https://bejeweled.plnt.earth">Bejeweled</a>
+        <a href="https://time.plnt.earth">Time</a>
+        <a href="https://time.plnt.earth/elevator/index.html">Elevator</a>
+        <a href="https://honey.plnt.earth">Honey</a>
+        <a href="https://mirror.plnt.earth">Mirror</a>
+        <a href="https://earth.plnt.earth">Earth</a>
+        <a href="https://time.plnt.earth/anchors/index.html">Anchors</a>
+        <a href="https://time.plnt.earth/map/index.html">Map</a>
+      </nav>
+    </div>
+  </div>
+
   <div class="wrap">
     <header>
       <div class="logo">τ-manifolds</div>
@@ -72,7 +133,7 @@
       <div class="subtitle">A τ-framework hypothesis for cross-manifold synchronization and causal loops</div>
       <div class="meta">Author: Tristan White • v1.0 • Updated: Mon, Sep 1, 2025, 5:52 PM EDT</div>
 
-      <nav aria-label="Contents">
+      <nav class="toc" aria-label="Contents">
         <ul>
           <li><a href="#abstract">Abstract</a></li>
           <li><a href="#intro">1. Introduction</a></li>
@@ -85,6 +146,7 @@
           <li><a href="#implications">8. Implications & Risks</a></li>
           <li><a href="#conclusion">9. Conclusion</a></li>
           <li><a href="#references">References</a></li>
+          <li><a href="#acknowledgments">Acknowledgments</a></li>
           <li><a href="#appendix-a">Appendix A — τ-Manifold Dictionary</a></li>
           <li><a href="#appendix-b">Appendix B — Test Protocols (Checklist)</a></li>
           <li><a href="#appendix-c">Appendix C — Reporting Metrics</a></li>
@@ -95,22 +157,22 @@
     <main>
       <section id="abstract"><h2>Abstract</h2>
         <p class="abstract">
-          We explore whether <em>parallel temporal manifolds</em>—hidden layers of the temporal–energetic substrate defined by <span class="equation" style="display:inline-block">τ ≡ E/c³ ≡ m/c</span>—could offset relativistic time dilation or aid in constructing closed timelike geometries. We formalize a <em>τ-synchronization condition</em> for worldlines coupled across manifolds, outline routes to effective “no-net-dilation” travel without superluminal motion, and examine causality risks for manifold-mediated time loops. We emphasize that these ideas are speculative and likely bounded by energy conditions, quantum inequalities, topological censorship, and chronology protection. We propose near-term laboratory proxies using entangled clocks, Casimir platforms, and analog gravity systems.
+          We explore whether <em>parallel temporal manifolds</em>—hidden layers of the temporal–energetic substrate defined by <span class="equation" style="display:inline-block">τ ≡ E/c³ ≡ m/c</span>—could offset relativistic time dilation or aid in constructing closed timelike geometries. We formalize a <em>τ-synchronization condition</em> for worldlines coupled across manifolds, outline routes to effective "no-net-dilation" travel without superluminal motion, and examine causality risks for manifold-mediated time loops. We emphasize that these ideas are speculative and likely bounded by energy conditions, quantum inequalities, topological censorship, and chronology protection. We propose near-term laboratory proxies using entangled clocks, Casimir platforms, and analog gravity systems.
         </p>
       </section>
 
       <section id="intro"><h2>1. Introduction</h2>
         <p>
-          In relativity, time dilation is geometric: different worldlines accumulate different proper time. To “avoid” it, one must change the geometry—e.g., via wormholes or warp bubbles. In the τ framework, spacetime may be a projection of a richer temporal substrate with multiple <em>τ manifolds</em>. If cross-manifold coupling can keep clocks phase-locked in τ, a traveler might go far and return with negligible differential aging. We ask: what would such coupling entail, and what would it risk?
+          In relativity, time dilation is geometric: different worldlines accumulate different proper time. To "avoid" it, one must change the geometry—e.g., via wormholes or warp bubbles. In the τ framework, spacetime may be a projection of a richer temporal substrate with multiple <em>τ manifolds</em>. If cross-manifold coupling can keep clocks phase-locked in τ, a traveler might go far and return with negligible differential aging. We ask: what would such coupling entail, and what would it risk?
         </p>
       </section>
 
       <section id="theory"><h2>2. τ-Manifold Theory</h2>
-        <div class="equation">τ ≡ \frac{E}{c^3} = \frac{m}{c}</div>
+        <div class="equation">τ ≡ E/c³ = m/c</div>
         <p>
           We postulate a family of manifolds <code>{𝕄_τ^i}</code> representing orthogonal channels of τ expression (mass, energy, curvature, coherence). Physical spacetime is a projection of a bundle <code>𝔅(𝕄_τ^i)</code>. Let a worldline <code>Γ</code> carry a local τ-flow rate:
         </p>
-        <div class="equation">\dot τ(Γ) \equiv \frac{dτ_{loc}}{dt} = f\!\left(g_{\mu\nu}, v^\mu, T_{\mu\nu}; \{\chi_i\}\right)</div>
+        <div class="equation">τ̇(Γ) ≡ dτ_loc/dt = f(g_μν, v^μ, T_μν; {χ_i})</div>
         <p>
           where <code>{χ_i}</code> denote coupling strengths into hidden manifolds. Standard relativity corresponds to <code>χ_i = 0</code>.
         </p>
@@ -123,7 +185,7 @@
         <p>
           A traveler follows two linked paths: a spatial worldline in 4D and a τ-path across manifolds. Define a synchronization target:
         </p>
-        <div class="equation">\boxed{\;\frac{dτ_{ship}}{dt} \approx \frac{dτ_{Earth}}{dt}\; \text{for all } t\;}</div>
+        <div class="equation">dτ_ship/dt ≈ dτ_Earth/dt for all t</div>
         <p>
           Practically, this suggests three (speculative) levers:
         </p>
@@ -141,7 +203,7 @@
         <p>
           Backward time travel would require a closed loop in causal order. In τ terms:
         </p>
-        <div class="equation">\oint_{\mathcal{C}} dτ_{eff} \le 0 \quad \Rightarrow \quad \text{non-monotonic τ along a closed path}</div>
+        <div class="equation">∮_C dτ_eff ≤ 0 ⇒ non-monotonic τ along a closed path</div>
         <p>
           Potential routes:
         </p>
@@ -150,7 +212,7 @@
           <li><strong>Manifold-locked wormhole:</strong> Keep both mouths τ-synchronized; relativity allows time shifts via mouth motion—τ-locking could tune them.</li>
         </ul>
         <p>
-          However, quantum backreaction (chronology protection) may destabilize any attempt at <code>∮ dτ_{eff} ≤ 0</code>.
+          However, quantum backreaction (chronology protection) may destabilize any attempt at <code>∮ dτ_eff ≤ 0</code>.
         </p>
       </section>
 
@@ -169,33 +231,35 @@
 
       <section id="tests"><h2>6. Experimental Probes & Signals</h2>
         <h3>6.1 Near-term laboratory probes</h3>
-        <table>
-          <tr><th>Probe</th><th>Method</th><th>Observable</th><th>Interpretation</th></tr>
-          <tr>
-            <td>Entangled clocks</td>
-            <td>Synchronize optical clocks; separate in height/velocity</td>
-            <td>Correlation of phase beyond GR/SR prediction</td>
-            <td>Evidence for τ-link across manifolds</td>
-          </tr>
-          <tr>
-            <td>Casimir/squeezed states</td>
-            <td>Engineer transient negative energy densities</td>
-            <td>Shift in local redshift vs control</td>
-            <td>Bounds on effective τ compensation</td>
-          </tr>
-          <tr>
-            <td>Analog gravity</td>
-            <td>Horizon analogs in optics/fluids</td>
-            <td>Backreaction near would-be CTC analogs</td>
-            <td>Chronology-protection analog tests</td>
-          </tr>
-          <tr>
-            <td>Atom interferometry</td>
-            <td>Dual-path proper-time phase comparison</td>
-            <td>Deviations under engineered EM/vacuum states</td>
-            <td>Constraints on χ<sub>i</sub> couplings</td>
-          </tr>
-        </table>
+        <div class="table-wrap">
+          <table>
+            <tr><th>Probe</th><th>Method</th><th>Observable</th><th>Interpretation</th></tr>
+            <tr>
+              <td>Entangled clocks</td>
+              <td>Synchronize optical clocks; separate in height/velocity</td>
+              <td>Correlation of phase beyond GR/SR prediction</td>
+              <td>Evidence for τ-link across manifolds</td>
+            </tr>
+            <tr>
+              <td>Casimir/squeezed states</td>
+              <td>Engineer transient negative energy densities</td>
+              <td>Shift in local redshift vs control</td>
+              <td>Bounds on effective τ compensation</td>
+            </tr>
+            <tr>
+              <td>Analog gravity</td>
+              <td>Horizon analogs in optics/fluids</td>
+              <td>Backreaction near would-be CTC analogs</td>
+              <td>Chronology-protection analog tests</td>
+            </tr>
+            <tr>
+              <td>Atom interferometry</td>
+              <td>Dual-path proper-time phase comparison</td>
+              <td>Deviations under engineered EM/vacuum states</td>
+              <td>Constraints on χ<sub>i</sub> couplings</td>
+            </tr>
+          </table>
+        </div>
 
         <h3>6.2 Astrophysical/space signals</h3>
         <ul>
@@ -209,7 +273,7 @@
         <h3>7.1 Manifold-Locked Wormhole</h3>
         <ul>
           <li>Stabilize a throat with exotic stress-energy.</li>
-          <li>Actively lock both mouths’ τ-phase to an Earth reference via entangled-clock feedback.</li>
+          <li>Actively lock both mouths' τ-phase to an Earth reference via entangled-clock feedback.</li>
           <li>Travel at low local speed through the throat → negligible kinematic/gravitational dilation.</li>
         </ul>
 
@@ -253,12 +317,21 @@
         </ol>
       </section>
 
+      <section id="acknowledgments"><h2>Acknowledgments</h2>
+        <p>
+          Special thanks to <strong>Dr. Clarissa R. Do Ó</strong> (<a href="https://twitter.com/AstroClary">@AstroClary</a>) — a badass astrophysicist whose insights and expertise helped shape this work.
+        </p>
+        <p>
+          Thanks also to <strong>Victor</strong> (<a href="https://twitter.com/Bluebeam80">@Bluebeam80</a>) — whose curiosity and probing questions pushed these ideas further.
+        </p>
+      </section>
+
       <section id="appendix-a"><h2>Appendix A — τ-Manifold Dictionary</h2>
         <div class="equation">τ ≡ E/c³ ≡ m/c</div>
-        <div class="equation">u_τ ≡ u/c³,\; P_τ ≡ P/c³,\; w_τ ≡ P_τ/u_τ</div>
-        <div class="equation">χ_i:\; \text{coupling strengths into hidden τ manifolds }</{𝕄_τ^i}></div>
-        <div class="equation">τ\text{-sync condition: } dτ_{ship}/dt ≈ dτ_{Earth}/dt</div>
-        <div class="equation">CTC criterion (τ form): \oint dτ_{eff} \le 0 \Rightarrow \text{causal loop risk}</div>
+        <div class="equation">u_τ ≡ u/c³, P_τ ≡ P/c³, w_τ ≡ P_τ/u_τ</div>
+        <div class="equation">χ_i: coupling strengths into hidden τ manifolds {𝕄_τ^i}</div>
+        <div class="equation">τ-sync condition: dτ_ship/dt ≈ dτ_Earth/dt</div>
+        <div class="equation">CTC criterion (τ form): ∮ dτ_eff ≤ 0 ⇒ causal loop risk</div>
       </section>
 
       <section id="appendix-b"><h2>Appendix B — Test Protocols (Checklist)</h2>
@@ -282,34 +355,40 @@
       </section>
 
       <section id="appendix-c"><h2>Appendix C — Reporting Metrics</h2>
-        <table>
-          <tr><th>Metric</th><th>Definition</th><th>Target/Use</th></tr>
-          <tr>
-            <td>Δτ offset</td>
-            <td>Δτ_ship − Δτ_ref over mission/test</td>
-            <td>Primary figure of merit</td>
-          </tr>
-          <tr>
-            <td>τ-sync error</td>
-            <td>max<sub>t</sub> | dτ_ship/dt − dτ_ref/dt |</td>
-            <td>Servo control objective</td>
-          </tr>
-          <tr>
-            <td>NEC violation budget</td>
-            <td>∫ (T<sub>μν</sub>k^μ k^ν)<sub>−</sub> dV dt</td>
-            <td>Feasibility vs quantum bounds</td>
-          </tr>
-          <tr>
-            <td>Backreaction index</td>
-            <td>Δ⟨T<sub>μν</sub>⟩/Δgeometry</td>
-            <td>Chronology-protection risk</td>
-          </tr>
-        </table>
+        <div class="table-wrap">
+          <table>
+            <tr><th>Metric</th><th>Definition</th><th>Target/Use</th></tr>
+            <tr>
+              <td>Δτ offset</td>
+              <td>Δτ_ship − Δτ_ref over mission/test</td>
+              <td>Primary figure of merit</td>
+            </tr>
+            <tr>
+              <td>τ-sync error</td>
+              <td>max<sub>t</sub> | dτ_ship/dt − dτ_ref/dt |</td>
+              <td>Servo control objective</td>
+            </tr>
+            <tr>
+              <td>NEC violation budget</td>
+              <td>∫ (T<sub>μν</sub>k<sup>μ</sup>k<sup>ν</sup>)<sub>−</sub> dV dt</td>
+              <td>Feasibility vs quantum bounds</td>
+            </tr>
+            <tr>
+              <td>Backreaction index</td>
+              <td>Δ⟨T<sub>μν</sub>⟩/Δgeometry</td>
+              <td>Chronology-protection risk</td>
+            </tr>
+          </table>
+        </div>
       </section>
     </main>
 
-    <footer>© <span id="y"></span> Tristan White • Creative Commons BY-NC-SA 4.0</footer>
+    <footer>
+      <div class="footer-earth">
+        <a href="https://earth.plnt.earth">Earth</a> is a grounding page. This one stays. A place to hold joy, music, and motion — untouched by the noise. If the system shifts, Earth remains.
+      </div>
+      © 2025 • Creative Commons BY-NC-SA 4.0
+    </footer>
   </div>
-  <script>document.getElementById("y").textContent = new Date().getFullYear();</script>
 </body>
 </html>
