@@ -28,6 +28,7 @@
     }
     a{color:var(--link);text-decoration:none}
     a:hover{text-decoration:underline}
+    
     .site-header{
       background:var(--panel);
       border-bottom:1px solid var(--rule);
@@ -53,12 +54,38 @@
       -webkit-text-fill-color:transparent;
       color:transparent;
     }
+    .nav-toggle{
+      display:none;
+      background:none;
+      border:1px solid var(--rule);
+      border-radius:8px;
+      padding:8px 12px;
+      color:var(--ink);
+      font-size:14px;
+      cursor:pointer;
+      margin-left:auto;
+    }
     .site-nav{
       display:flex;
       flex-wrap:wrap;
       gap:8px 16px;
     }
-    .site-nav a{font-size:14px}
+    .site-nav a{font-size:13px;white-space:nowrap;}
+    @media(max-width:768px){
+      .nav-toggle{display:block}
+      .site-nav{
+        display:none;
+        width:100%;
+        flex-direction:column;
+        gap:8px;
+        padding-top:12px;
+        border-top:1px solid var(--rule);
+        margin-top:8px;
+      }
+      .site-nav.open{display:flex}
+      .site-nav a{padding:8px 0;font-size:14px}
+    }
+    
     .wrap{max-width:var(--maxw);margin:0 auto;padding:48px 20px 96px}
     header{text-align:center;margin-bottom:32px}
     .logo{
@@ -73,7 +100,7 @@
       display:inline-block;
       margin-bottom:12px;
     }
-    h1{margin:0 0 8px;font-size:clamp(26px,4.5vw,38px);line-height:1.2}
+    h1{margin:0 0 8px;font-size:clamp(22px,4.5vw,38px);line-height:1.2}
     .subtitle{color:var(--muted);font-size:15px}
     .meta{margin-top:8px;color:var(--muted);font-size:14px}
     nav.toc{margin:26px auto;max-width:740px;text-align:left;background:var(--panel);
@@ -84,14 +111,34 @@
     h2{margin:0 0 8px;font-size:clamp(20px,3.5vw,26px)}
     h3{margin:16px 0 8px;font-size:18px}
     p{margin:10px 0 0}
-    .equation{display:block;margin:12px 0;padding:12px 14px;background:var(--code);
-      border:1px solid var(--rule);border-radius:10px;
-      font-family:ui-monospace,Menlo,Consolas,"Courier New",monospace;overflow-x:auto;white-space:nowrap}
+    
+    /* Fixed equation boxes */
+    .equation{
+      display:block;
+      margin:12px 0;
+      padding:12px 14px;
+      background:var(--code);
+      border:1px solid var(--rule);
+      border-radius:10px;
+      font-family:ui-monospace,Menlo,Consolas,"Courier New",monospace;
+      overflow-x:auto;
+      white-space:pre-wrap;
+      word-wrap:break-word;
+      font-size:14px;
+      line-height:1.4;
+    }
+    @media(max-width:500px){
+      .equation{
+        font-size:12px;
+        padding:10px 12px;
+      }
+    }
+    
     .abstract{font-style:italic;color:var(--muted)}
     .callout{padding:14px;border:1px dashed var(--rule);border-radius:12px;background:rgba(245,158,11,.08)}
     .table-wrap{overflow-x:auto;margin:8px 0}
     table{width:100%;border-collapse:collapse;min-width:500px}
-    th,td{border:1px solid var(--rule);padding:8px;vertical-align:top}
+    th,td{border:1px solid var(--rule);padding:8px;vertical-align:top;font-size:14px}
     th{background:var(--panel);text-align:left}
     code{background:var(--code);padding:1px 4px;border-radius:4px}
     footer{margin-top:26px;color:var(--muted);font-size:13px;text-align:center}
@@ -110,18 +157,17 @@
   <div class="site-header">
     <div class="site-header-inner">
       <div class="site-title">✨ Manifold Dynamics</div>
-      <nav class="site-nav">
-        <a href="https://manifolddynamics.plnt.earth">Manifold Dynamics</a>
-        <a href="https://manifolddynamics.plnt.earth/t">Manifold T</a>
-        <a href="https://infinity.plnt.earth">Infinity</a>
-        <a href="https://bejeweled.plnt.earth">Bejeweled</a>
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle navigation">Menu ▾</button>
+      <nav class="site-nav" id="siteNav">
         <a href="https://time.plnt.earth">Time</a>
-        <a href="https://time.plnt.earth/elevator/index.html">Elevator</a>
+        <a href="https://time.plnt.earth/elevator">Elevator</a>
+        <a href="https://time.plnt.earth/anchors">Anchors</a>
+        <a href="https://time.plnt.earth/map">Map</a>
+        <a href="https://time.plnt.earth/charter">Charter</a>
+        <a href="https://bejeweled.plnt.earth">Bejeweled</a>
         <a href="https://honey.plnt.earth">Honey</a>
         <a href="https://mirror.plnt.earth">Mirror</a>
         <a href="https://earth.plnt.earth">Earth</a>
-        <a href="https://time.plnt.earth/anchors/index.html">Anchors</a>
-        <a href="https://time.plnt.earth/map/index.html">Map</a>
       </nav>
     </div>
   </div>
@@ -136,6 +182,7 @@
       <nav class="toc" aria-label="Contents">
         <ul>
           <li><a href="#abstract">Abstract</a></li>
+          <li><a href="#invitation">An Open Invitation — Dr. Clary</a></li>
           <li><a href="#intro">1. Introduction</a></li>
           <li><a href="#theory">2. τ-Manifold Theory</a></li>
           <li><a href="#offset">3. Offsetting Relativistic Time Dilation</a></li>
@@ -157,7 +204,40 @@
     <main>
       <section id="abstract"><h2>Abstract</h2>
         <p class="abstract">
-          We explore whether <em>parallel temporal manifolds</em>—hidden layers of the temporal–energetic substrate defined by <span class="equation" style="display:inline-block">τ ≡ E/c³ ≡ m/c</span>—could offset relativistic time dilation or aid in constructing closed timelike geometries. We formalize a <em>τ-synchronization condition</em> for worldlines coupled across manifolds, outline routes to effective "no-net-dilation" travel without superluminal motion, and examine causality risks for manifold-mediated time loops. We emphasize that these ideas are speculative and likely bounded by energy conditions, quantum inequalities, topological censorship, and chronology protection. We propose near-term laboratory proxies using entangled clocks, Casimir platforms, and analog gravity systems.
+          We explore whether <em>parallel temporal manifolds</em>—hidden layers of the temporal–energetic substrate defined by <span class="equation" style="display:inline-block;margin:0;padding:2px 6px;">τ ≡ E/c³ ≡ m/c</span>—could offset relativistic time dilation or aid in constructing closed timelike geometries. We formalize a <em>τ-synchronization condition</em> for worldlines coupled across manifolds, outline routes to effective "no-net-dilation" travel without superluminal motion, and examine causality risks for manifold-mediated time loops. We emphasize that these ideas are speculative and likely bounded by energy conditions, quantum inequalities, topological censorship, and chronology protection. We propose near-term laboratory proxies using entangled clocks, Casimir platforms, and analog gravity systems.
+        </p>
+      </section>
+
+      <!-- DR. CLARY INVITATION -->
+      <section id="invitation" style="background:linear-gradient(135deg,rgba(124,58,237,.08),rgba(102,199,232,.08));border:2px solid #66c7e8;">
+        <h2 style="color:#66c7e8;">An Open Invitation — Dr. Clary</h2>
+        <p style="font-style:italic;margin-bottom:16px;">
+          Dr. Clarissa R. Do Ó (<a href="https://twitter.com/AstroClary">@AstroClary</a>),
+        </p>
+        <p>
+          The attached material presents a conceptual framework for exploring temporal structure using what we call <strong>τ-manifolds</strong>—interpretive temporal layers aligned with intrinsic quantum timescales, particularly the Compton time (τ = ħ/(mc²)). This framework is intended as a structured narrative and analytical scaffold, not as a proposal for new physics.
+        </p>
+        <p>
+          The τ-manifold structure organizes a set of Einstein-style exploratory questions (clearly identified as fictional) that help articulate motivations behind studying layered temporal responses, differential aging, resonance phenomena, and synchronization constraints within established relativistic and quantum frameworks.
+        </p>
+        
+        <h3>Key points for scientific interpretation:</h3>
+        <ol style="font-size:14px;line-height:1.7;">
+          <li><strong>No deviation from GR or QFT is proposed.</strong> Proper time, curvature, energy conditions, and causal structure remain untouched.</li>
+          <li><strong>τ-layers act as conceptual channels</strong>, analogous to internal timescales, providing a systematic way to discuss temporal resonance, phase stability, and clock behavior under relativistic or quantum influences.</li>
+          <li><strong>All constructions remain reducible to established invariants.</strong> Chronology protection, topological censorship, and quantum inequalities explicitly bound the interpretive possibilities.</li>
+          <li><strong>The project functions as a conceptual atlas</strong>, offering: a coherent vocabulary for discussing "layered time," structured prompts for theoretical exploration, and experimental analogies (entangled clocks, Casimir systems, interferometry) where subtle temporal structure could be probed.</li>
+          <li><strong>A full physics-safe integration has been completed</strong>, including an academically-refined introduction, a physics addendum clarifying interpretive status, a structured placement map, and supplementary Einstein-style questions.</li>
+        </ol>
+        
+        <p>
+          Your role, should you choose to engage, would be to refine the formal scientific interpretation—identifying which questions merit rigorous treatment, which analogies can be made precise, and where the conceptual structure aligns with or diverges from current theoretical frameworks.
+        </p>
+        <p>
+          The intent is to provide a clean, well-organized foundation for any future scholarly development, should you see value in the themes presented here. If at any point you would like the material translated into LaTeX, arXiv formatting, or a formal literature-review structure, that can be generated immediately.
+        </p>
+        <p style="margin-top:16px;font-size:14px;color:var(--muted);">
+          <em>Prepared for your review by request of the author. No response is expected or required—this invitation exists openly, with respect.</em>
         </p>
       </section>
 
@@ -170,14 +250,14 @@
       <section id="theory"><h2>2. τ-Manifold Theory</h2>
         <div class="equation">τ ≡ E/c³ = m/c</div>
         <p>
-          We postulate a family of manifolds <code>{𝕄_τ^i}</code> representing orthogonal channels of τ expression (mass, energy, curvature, coherence). Physical spacetime is a projection of a bundle <code>𝔅(𝕄_τ^i)</code>. Let a worldline <code>Γ</code> carry a local τ-flow rate:
+          We postulate a family of manifolds {𝕄_τ^i} representing orthogonal channels of τ expression (mass, energy, curvature, coherence). Physical spacetime is a projection of a bundle 𝔅(𝕄_τ^i). Let a worldline Γ carry a local τ-flow rate:
         </p>
         <div class="equation">τ̇(Γ) ≡ dτ_loc/dt = f(g_μν, v^μ, T_μν; {χ_i})</div>
         <p>
-          where <code>{χ_i}</code> denote coupling strengths into hidden manifolds. Standard relativity corresponds to <code>χ_i = 0</code>.
+          where {χ_i} denote coupling strengths into hidden manifolds. Standard relativity corresponds to χ_i = 0.
         </p>
         <div class="callout">
-          <strong>Hypothesis:</strong> Nonzero <code>χ_i</code> allow controlled exchange of τ across manifolds, modifying the effective proper-time accumulation without violating local light cones.
+          <strong>Hypothesis:</strong> Nonzero χ_i allow controlled exchange of τ across manifolds, modifying the effective proper-time accumulation without violating local light cones.
         </div>
       </section>
 
@@ -191,7 +271,7 @@
         </p>
         <ol>
           <li><strong>Geometric shortcut:</strong> Minimize kinematic/gravitational dilation (wormhole/warp), keeping local speed low.</li>
-          <li><strong>Manifold compensation:</strong> Adjust <code>χ_i</code> so τ withdrawn from a hidden channel offsets relativistic deficits.</li>
+          <li><strong>Manifold compensation:</strong> Adjust χ_i so τ withdrawn from a hidden channel offsets relativistic deficits.</li>
           <li><strong>Clock control:</strong> Actively servo local redshift using precise altitude/velocity profiles and quantum-clock feedback (a conventional minimization approach).</li>
         </ol>
         <p>
@@ -212,7 +292,7 @@
           <li><strong>Manifold-locked wormhole:</strong> Keep both mouths τ-synchronized; relativity allows time shifts via mouth motion—τ-locking could tune them.</li>
         </ul>
         <p>
-          However, quantum backreaction (chronology protection) may destabilize any attempt at <code>∮ dτ_eff ≤ 0</code>.
+          However, quantum backreaction (chronology protection) may destabilize any attempt at ∮ dτ_eff ≤ 0.
         </p>
       </section>
 
@@ -256,7 +336,7 @@
               <td>Atom interferometry</td>
               <td>Dual-path proper-time phase comparison</td>
               <td>Deviations under engineered EM/vacuum states</td>
-              <td>Constraints on χ<sub>i</sub> couplings</td>
+              <td>Constraints on χ_i couplings</td>
             </tr>
           </table>
         </div>
@@ -296,7 +376,7 @@
         <ul>
           <li>Manifold exchange reframes time-dilation avoidance as <em>τ accounting</em>, not superluminal travel.</li>
           <li>Any path toward time loops risks paradox; enforce self-consistency or forbid loops via protection mechanisms.</li>
-          <li>Even null results are valuable: they bound χ<sub>i</sub> and clarify the limits of metric engineering.</li>
+          <li>Even null results are valuable: they bound χ_i and clarify the limits of metric engineering.</li>
         </ul>
       </section>
 
@@ -319,7 +399,7 @@
 
       <section id="acknowledgments"><h2>Acknowledgments</h2>
         <p>
-          Special thanks to <strong>Dr. Clarissa R. Do Ó</strong> (<a href="https://twitter.com/AstroClary">@AstroClary</a>) — a badass astrophysicist whose insights and expertise helped shape this work.
+          Special thanks to <strong>Dr. Clarissa R. Do Ó</strong> (<a href="https://twitter.com/AstroClary">@AstroClary</a>) — a brilliant astrophysicist whose insights and expertise continue to inspire this work.
         </p>
         <p>
           Thanks also to <strong>Victor</strong> (<a href="https://twitter.com/Bluebeam80">@Bluebeam80</a>) — whose curiosity and probing questions pushed these ideas further.
@@ -350,7 +430,7 @@
         <h3>B.3 Reporting</h3>
         <ul>
           <li>Publish proper-time integrals and uncertainty budgets; express effects in τ units.</li>
-          <li>Set limits on χ<sub>i</sub> from null results; provide open data and code.</li>
+          <li>Set limits on χ_i from null results; provide open data and code.</li>
         </ul>
       </section>
 
@@ -365,17 +445,17 @@
             </tr>
             <tr>
               <td>τ-sync error</td>
-              <td>max<sub>t</sub> | dτ_ship/dt − dτ_ref/dt |</td>
+              <td>max_t | dτ_ship/dt − dτ_ref/dt |</td>
               <td>Servo control objective</td>
             </tr>
             <tr>
               <td>NEC violation budget</td>
-              <td>∫ (T<sub>μν</sub>k<sup>μ</sup>k<sup>ν</sup>)<sub>−</sub> dV dt</td>
+              <td>∫ (T_μν k^μ k^ν)_− dV dt</td>
               <td>Feasibility vs quantum bounds</td>
             </tr>
             <tr>
               <td>Backreaction index</td>
-              <td>Δ⟨T<sub>μν</sub>⟩/Δgeometry</td>
+              <td>Δ⟨T_μν⟩/Δgeometry</td>
               <td>Chronology-protection risk</td>
             </tr>
           </table>
@@ -390,5 +470,14 @@
       © 2025 • Creative Commons BY-NC-SA 4.0
     </footer>
   </div>
+
+  <script>
+    // NAV TOGGLE
+    document.getElementById('navToggle').addEventListener('click', function(){
+      var nav = document.getElementById('siteNav');
+      nav.classList.toggle('open');
+      this.textContent = nav.classList.contains('open') ? 'Menu ▴' : 'Menu ▾';
+    });
+  </script>
 </body>
 </html>
